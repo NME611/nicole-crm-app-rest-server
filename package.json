@@ -1,6 +1,7 @@
 {
   "name": "nicole-crm-app-rest-server",
   "version": "0.1.0",
+  "homepage": "https://NME611.github.io/nicole-crm-app-rest-server",
   "private": true,
   "dependencies": {
     "@testing-library/jest-dom": "^5.17.0",
