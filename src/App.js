@@ -4,25 +4,20 @@ import './App.css';
 import { CustomerList } from './CustomerList.js';
 import { CustomerAddUpdateForm } from './CustomerAddUpdateForm.js';
 
-function log(message) {
-  // console.log(message);
-}
-
 export function App(params) {
   let blankCustomer = { "id": -1, "name": "", "email": "", "password": "" };
   const [customers, setCustomers] = useState([]);
   const [formObject, setFormObject] = useState(blankCustomer);
   let mode = (formObject.id >= 0) ? 'Update' : 'Add';
 
+  // Call getCustomers when formObject changes (or you could use a 'dataChange' counter)
   useEffect(() => { getCustomers() }, [formObject]);
 
   const getCustomers = function () {
-    log("in getCustomers()");
     getAll(setCustomers);
   }
 
   const handleListClick = function (item) {
-    log("in handleListClick()");
     if (formObject.id === item.id) {
       setFormObject(blankCustomer);
     } else {
@@ -31,7 +26,6 @@ export function App(params) {
   }
 
   const handleInputChange = function (event) {
-    log("in handleInputChange()");
     const name = event.target.name;
     const value = event.target.value;
     let newFormObject = { ...formObject }
@@ -40,14 +34,13 @@ export function App(params) {
   }
 
   let onCancelClick = function () {
-    log("in onCancelClick()");
     setFormObject(blankCustomer);
   }
 
   let onDeleteClick = function () {
-    let postopCallback = () => { setFormObject(blankCustomer); }
+    let postOpCallback = () => { setFormObject(blankCustomer); }
     if (formObject.id >= 0) {
-      deleteById(formObject.id, postopCallback);
+      deleteById(formObject.id, postOpCallback);
     } else {
       setFormObject(blankCustomer);
     }
@@ -61,7 +54,6 @@ export function App(params) {
     if (mode === 'Update') {
       put(formObject, postopCallback);
     }
-
   }
 
   let pvars = {
